@@ -6,7 +6,7 @@
 
 int get_change(void);
 void min_coins(int);
-    
+
 int main(void)
 {
     int cents = get_change();
@@ -21,7 +21,7 @@ int get_change(void)
         dollars = get_float("Change owed: ");
     }
     while (dollars < 0);
-    
+
     int cents = round(dollars * 100);
     return cents;
 }
@@ -29,7 +29,7 @@ int get_change(void)
 void min_coins(int cents)
 {
     int coins = 0;
-    
+
     if (cents == 0)
     {
         coins = 0;
