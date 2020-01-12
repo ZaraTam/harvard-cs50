@@ -18,6 +18,7 @@ int main(void)
     int length = floor(log10(number)) + 1
     for (int i = 0; i < length; i++)
     {
+        // TODO
         if (i + 1) % 2 == 0
         {
             digit = (number % 10^(i + 1)) / 10^i * 2
