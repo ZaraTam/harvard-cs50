@@ -1,25 +1,33 @@
 // Coleman-Liau index
 
+#include <math.h>
 #include <stdio.h>
-#include <cs50.h>
 #include <string.h>
+#include <cs50.h>
 
 string get_text(void);
 int count_letters(string text);
 int count_words(string text);
 int count_sentences(string text);
+int get_grade(int letter_count, int word_count, int sentence_count);
 
 int main(void)
 {
     string text = get_text();
-    count_letters(text);
-    count_words(text);
-    count_sentences(text);
+    int letter_count = count_letters(text);
+    int word_count = count_words(text);
+    int sentence_count = count_sentences(text);
+    get_grade(letter_count, word_count, sentence_count);
 }
 
 string get_text(void)
 {
-    string text = get_string("Text: ");   
+    string text;
+    do
+    {
+        text = get_string("Text: ");
+    }
+    while (strlen(text) == 0);
     return text;
 }
 
@@ -34,7 +42,6 @@ int count_letters(string text)
             letter_count++;
         }
     }
-    printf("%i letter(s)\n", letter_count);
     return letter_count;
 }
 
@@ -50,7 +57,6 @@ int count_words(string text)
         }
     }
     word_count = space_count + 1;
-    printf("%i word(s)\n", word_count);
     return word_count;
 }
 
@@ -67,6 +73,27 @@ int count_sentences(string text)
         }
     }
     sentence_count = end_character_count;
-    printf("%i sentence(s)\n", sentence_count);
     return sentence_count;
+}
+
+int get_grade(int letter_count, int word_count, int sentence_count)
+{
+    float average_letters = 100 / (float) word_count * (float) letter_count;
+    float average_sentences = 100 / (float) word_count * (float) sentence_count;
+    float index = 0.0588 * average_letters - 0.296 * average_sentences - 15.8;
+    int grade = roundf(index);
+
+    if (grade < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (grade >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
+    {
+        printf("Grade %i\n", grade);
+    }
+    return grade;
 }
