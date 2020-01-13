@@ -21,10 +21,12 @@ int main(int argc, string argv[])
 //         }
         
         int key = atoi(k);
-        printf("%s\n", k);
-        printf("%i\n", key);
+        printf("k = %s\n", k);
+        printf("key = %i\n", key);
+        printf("key mod 26 = %i\n", key % 26);
         string plaintext = get_string("plaintext: ");
-        printf("%c\n", plaintext[0]);
+        printf("plaintext = %c\n", plaintext[0]);
+
 
         string ciphertext = "";
         for (int i = 0, n = strlen(plaintext); i < n; i++)
@@ -32,9 +34,8 @@ int main(int argc, string argv[])
             // If character is from A to Z, or from a to z
             if ((plaintext[i] >= 65 && plaintext[i] <= 90) || (plaintext[i] >= 97 && plaintext[i] <= 122))
             {
-                ciphertext[i] = plaintext[i];
-                // + k % 26;
-                // TODO handle Z and z
+                ciphertext[i] = plaintext[i] + key % 26;
+                // TODO handle wrapping around alphabetically, e.g. Z as A
             }
             else
             {
