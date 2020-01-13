@@ -8,20 +8,23 @@ int main(int argc, string argv[])
     if (argc == 2)
     {
         string k = argv[1];
-        for (int i = 0, n = strlen(argv[1]); i < n; i++)
-        {
-            if (isdigit(argv[1][i]))
-            {
-                return 0;
-            }
-            else
-            {
-                return 1;
-            }
-        }
+//         for (int i = 0, n = strlen(argv[1]); i < n; i++)
+//         {
+//             if (isdigit(argv[1][i]))
+//             {
+//                 return 0;
+//             }
+//             else
+//             {
+//                 return 1;
+//             }
+//         }
         
+        int key = atoi(k);
         printf("%s\n", k);
+        printf("%i\n", key);
         string plaintext = get_string("plaintext: ");
+        printf("%c\n", plaintext[0]);
 
         string ciphertext = "";
         for (int i = 0, n = strlen(plaintext); i < n; i++)
@@ -37,7 +40,6 @@ int main(int argc, string argv[])
             {
                 ciphertext[i] = plaintext[i];
             }
-            
         }
         printf("ciphertext: %s\n", ciphertext);
         return 0;
