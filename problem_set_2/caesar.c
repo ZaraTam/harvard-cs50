@@ -26,13 +26,13 @@ int main(int argc, string argv[])
         printf("k = %s\n", k);
         printf("key = %i\n", key);
         string plaintext = get_string("plaintext: ");
-        string ciphertext = "";
+        string ciphertext = plaintext;
         for (int i = 0, n = strlen(plaintext); i < n; i++)
         {
             // If character is from A to Z, or from a to z
             if ((plaintext[i] >= 65 && plaintext[i] <= 90) || (plaintext[i] >= 97 && plaintext[i] <= 122))
             {
-                ciphertext[i] = plaintext[i] + key;
+                ciphertext[i] = ((plaintext[i] + key) % 26);
                 // TODO handle wrapping around alphabetically, e.g. Z as A
             }
             else
