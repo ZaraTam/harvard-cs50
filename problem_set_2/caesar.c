@@ -3,7 +3,7 @@
 #include <string.h>
 #include <cs50.h>
 
-int check_argument(string k);
+bool check_argument(string k);
 
 int main(int argc, string argv[])
 {
@@ -50,7 +50,7 @@ int main(int argc, string argv[])
     }
 }
 
-int check_argument(string k)
+bool check_argument(string k)
 {
     int digit_count = 0;
     bool is_argument_valid;
