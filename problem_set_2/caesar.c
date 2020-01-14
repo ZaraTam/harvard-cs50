@@ -10,9 +10,19 @@ int main(int argc, string argv[])
     if (argc == 2)
     {
         string k = argv[1];
-        check_argument(k);
+        int key;
+        bool is_argument_valid = check_argument(k);
 
-        int key = atoi(k) % 26;
+        if (is_argument_valid == true)
+        {
+            key = atoi(k) % 26;
+        }
+        else
+        {
+            printf("Usage: ./caesar key\n");
+            return 1;
+        }
+        
         printf("k = %s\n", k);
         printf("key = %i\n", key);
         string plaintext = get_string("plaintext: ");
@@ -42,19 +52,28 @@ int main(int argc, string argv[])
 
 int check_argument(string k)
 {
+    int digit_count = 0;
+    bool is_argument_valid;
     for (int i = 0, n = strlen(k); i < n; i++)
+    {
+        if (isdigit(k[i]) != 0)
         {
-            if (isdigit(k[i]) != 0)
-            {
-                printf("Digit\n");
-            }
-            else
-            {
-                printf("Not digit\n");
-                return 1;
-            }
+            digit_count++;
+            printf("Digit\n");
         }
-    // TODO turn string to int only if argument is all digits
-    int key = atoi(k) % 26;
-    return key;
+        else
+        {
+            printf("Not digit\n");
+            
+        }
+    }
+    if (digit_count == strlen(k))
+    {
+        is_argument_valid = true;
+    }
+    else
+    {
+        is_argument_valid = false;
+    }
+    return is_argument_valid;
 }
