@@ -22,7 +22,7 @@ int main(int argc, string argv[])
             printf("Usage: ./caesar key\n");
             return 1;
         }
-        
+
         printf("k = %s\n", k);
         printf("key = %i\n", key);
         string plaintext = get_string("plaintext: ");
@@ -64,7 +64,6 @@ bool check_argument(string k)
         else
         {
             printf("Not digit\n");
-            
         }
     }
     if (digit_count == strlen(k))
