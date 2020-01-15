@@ -23,25 +23,27 @@ int main(int argc, string argv[])
             return 1;
         }
 
-        printf("k = %s\n", k);
-        printf("key = %i\n", key);
         string plaintext = get_string("plaintext: ");
-        string ciphertext = plaintext;
+        printf("ciphertext: ");
         for (int i = 0, n = strlen(plaintext); i < n; i++)
         {
-            // If character is from A to Z, or from a to z
-            if ((plaintext[i] >= 65 && plaintext[i] <= 90) || (plaintext[i] >= 97 && plaintext[i] <= 122))
+            // If character is from A to Z
+            if (plaintext[i] >= 65 && plaintext[i] <= 90)
             {
-                ciphertext[i] = ((plaintext[i] + key) % 26);
-                // TODO handle wrapping around alphabetically, e.g. Z as A
+                printf("%c", (plaintext[i] - 65 + key) % 26 + 65);
+            }
+            // If character is from a to z
+            else if (plaintext[i] >= 97 && plaintext[i] <= 122)
+            {
+                printf("%c", (plaintext[i] - 97 + key) % 26 + 97);
             }
             else
             {
-                ciphertext[i] = plaintext[i];
+                printf("%c", plaintext[i]);
             }
-            printf("ciphertext: %s\n", ciphertext);
-            return 0;
         }
+        printf("\n");
+        return 0;
     }
     else
     {
@@ -59,11 +61,6 @@ bool check_argument(string k)
         if (isdigit(k[i]) != 0)
         {
             digit_count++;
-            printf("Digit\n");
-        }
-        else
-        {
-            printf("Not digit\n");
         }
     }
     if (digit_count == strlen(k))
