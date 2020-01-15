@@ -3,7 +3,7 @@
 #include <string.h>
 #include <cs50.h>
 
-bool check_argument(string k);
+bool validate_argument(string k);
 
 int main(int argc, string argv[])
 {
@@ -11,7 +11,7 @@ int main(int argc, string argv[])
     {
         string k = argv[1];
         int key;
-        bool is_argument_valid = check_argument(k);
+        bool is_argument_valid = validate_argument(k);
 
         if (is_argument_valid == true)
         {
@@ -52,7 +52,7 @@ int main(int argc, string argv[])
     }
 }
 
-bool check_argument(string k)
+bool validate_argument(string k)
 {
     int digit_count = 0;
     bool is_argument_valid;
