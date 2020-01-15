@@ -54,8 +54,8 @@ int main(int argc, string argv[])
 
 bool validate_key(string k)
 {
-    int digit_count = 0;
     bool is_key_valid;
+    int digit_count = 0;
     for (int i = 0, n = strlen(k); i < n; i++)
     {
         if (isdigit(k[i]) != 0)
