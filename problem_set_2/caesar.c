@@ -3,7 +3,7 @@
 #include <string.h>
 #include <cs50.h>
 
-bool validate_argument(string k);
+bool validate_key(string k);
 
 int main(int argc, string argv[])
 {
@@ -11,9 +11,9 @@ int main(int argc, string argv[])
     {
         string k = argv[1];
         int key;
-        bool is_argument_valid = validate_argument(k);
+        bool is_key_valid = validate_key(k);
 
-        if (is_argument_valid == true)
+        if (is_key_valid == true)
         {
             key = atoi(k) % 26;
         }
@@ -52,10 +52,10 @@ int main(int argc, string argv[])
     }
 }
 
-bool validate_argument(string k)
+bool validate_key(string k)
 {
     int digit_count = 0;
-    bool is_argument_valid;
+    bool is_key_valid;
     for (int i = 0, n = strlen(k); i < n; i++)
     {
         if (isdigit(k[i]) != 0)
@@ -65,11 +65,11 @@ bool validate_argument(string k)
     }
     if (digit_count == strlen(k))
     {
-        is_argument_valid = true;
+        is_key_valid = true;
     }
     else
     {
-        is_argument_valid = false;
+        is_key_valid = false;
     }
-    return is_argument_valid;
+    return is_key_valid;
 }
