@@ -18,7 +18,30 @@ int main(int argc, string argv[])
         bool is_key_valid = validate_key(key);
         printf("Key valid? %i", is_key_valid);
         printf("\n");
-        return 0;
+        if (is_key_valid == 1)
+        {
+            string plaintext = get_string("plaintext: ");
+            printf("ciphertext: ");
+            for (int i = 0, n = strlen(plaintext); i < n; i++)
+            {
+                // If character is from A to Z
+                if (plaintext[i] >= 65 && plaintext[i] <= 90)
+                {
+                    printf("%c", toupper(key[plaintext[i] - 65]));
+                }
+                // If character is from a to z
+                else if (plaintext[i] >= 97 && plaintext[i] <= 122)
+                {
+                    printf("%c", tolower(key[plaintext[i] - 97]));
+                }
+                else
+                {
+                    printf("%c", plaintext[i]);
+                }
+            }
+            printf("\n");
+            return 0;
+        }
     }
     else
     {
