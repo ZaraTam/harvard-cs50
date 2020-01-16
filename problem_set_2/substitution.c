@@ -3,7 +3,12 @@
 #include <string.h>
 #include <cs50.h>
 
+const int NUMBER_OF_ALPHABETS = 26;
+
 bool validate_key(string key);
+bool validate_length(string key, int n);
+bool validate_alphabet(string key, int n);
+bool validate_alphabet_once(string key, int n);
 
 int main(int argc, string argv[])
 {
@@ -11,9 +16,9 @@ int main(int argc, string argv[])
     {
         string key = argv[1];
         bool is_key_valid = validate_key(key);
-        printf("%i", is_key_valid);
-    printf("\n");
-    return 0;
+        printf("Key valid? %i", is_key_valid);
+        printf("\n");
+        return 0;
     }
     else
     {
@@ -26,54 +31,97 @@ bool validate_key(string key)
 {
     bool is_key_valid;
     int n = strlen(key);
-    int character_count = 0;
-    if (n == 26)
+    bool is_length_valid = validate_length(key, n);
+    if (is_length_valid == true)
     {
-        for (int i = 0; i < n; i++)
+        bool is_alphabet = validate_alphabet(key, n);
+        if (is_alphabet == true)
         {
-            if (isalpha(key[i]) != 0)
+            bool is_alphabet_once = validate_alphabet_once(key, n);
+            if (is_alphabet_once == true)
             {
-                character_count++;
+                is_key_valid = true;
             }
-        }
-        if (character_count == n)
-        {
-            printf("26 alphabetic characters\n");
-
-            int alphabet_count[26];
-            for (int i = 0; i < 26; i++)
+            else
             {
-                alphabet_count[i] = 0;
-            }
-
-            char upper_key[26];
-            for (int i = 0; i < n; i++)
-            {
-                upper_key[i] = toupper(key[i]);
-                alphabet_count[upper_key[i] - 65]++;
-                printf("%i ", alphabet_count[upper_key[i] - 65]);
-                if (alphabet_count[upper_key[i] - 65] > 1)
-                {
-                    printf("Key must contain each alphabet exactly once\n");
-                    is_key_valid = false;
-                }
-                else
-                {
-                    is_key_valid = true;
-                }
+                is_key_valid = false;
             }
         }
         else
         {
-            printf("Key must contain alphabetic characters only\n");
             is_key_valid = false;
         }
     }
     else
     {
-        printf("Key must contain 26 characters\n");
         is_key_valid = false;
     }
-    printf("%i\n", is_key_valid);
     return is_key_valid;
+}
+
+bool validate_length(string key, int n)
+{
+    bool is_length_valid;
+    if (n == NUMBER_OF_ALPHABETS)
+    {
+        is_length_valid = true;
+    }
+    else
+    {
+        is_length_valid = false;
+        printf("Key must contain 26 characters\n");
+    }
+    return is_length_valid;
+}
+
+bool validate_alphabet(string key, int n)
+{
+    bool is_alphabet;
+    int character_count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (isalpha(key[i]) != 0)
+        {
+            character_count++;
+        }
+    }
+    if (character_count == n)
+    {
+        is_alphabet = true;
+        printf("26 alphabetic characters\n");
+    }
+    else
+    {
+        is_alphabet = false;
+        printf("Key must contain alphabetic characters only\n");
+    }
+    return is_alphabet;
+}
+
+bool validate_alphabet_once(string key, int n)
+{
+    bool is_alphabet_once;
+    int alphabet_count[NUMBER_OF_ALPHABETS];
+    for (int i = 0; i < NUMBER_OF_ALPHABETS; i++)
+    {
+        alphabet_count[i] = 0;
+    }
+
+    char upper_key[n];
+    for (int i = 0; i < n; i++)
+    {
+        upper_key[i] = toupper(key[i]);
+        alphabet_count[upper_key[i] - 65]++;
+        printf("%i ", alphabet_count[upper_key[i] - 65]);
+        if (alphabet_count[upper_key[i] - 65] > 1)
+        {
+            printf("Key must contain each alphabet exactly once\n");
+            is_alphabet_once = false;
+        }
+        else
+        {
+            is_alphabet_once = true;
+        }
+    }
+    return is_alphabet_once;
 }
