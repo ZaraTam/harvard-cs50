@@ -16,8 +16,6 @@ int main(int argc, string argv[])
     {
         string key = argv[1];
         bool is_key_valid = validate_key(key);
-        printf("Key valid? %i", is_key_valid);
-        printf("\n");
         if (is_key_valid == 1)
         {
             string plaintext = get_string("plaintext: ");
@@ -111,7 +109,6 @@ bool validate_alphabet(string key, int n)
     if (character_count == n)
     {
         is_alphabet = true;
-        printf("26 alphabetic characters\n");
     }
     else
     {
@@ -135,7 +132,6 @@ bool validate_alphabet_once(string key, int n)
     {
         upper_key[i] = toupper(key[i]);
         alphabet_count[upper_key[i] - 65]++;
-        printf("%i ", alphabet_count[upper_key[i] - 65]);
         if (alphabet_count[upper_key[i] - 65] > 1)
         {
             printf("Key must contain each alphabet exactly once\n");
