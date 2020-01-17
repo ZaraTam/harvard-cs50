@@ -88,9 +88,7 @@ void print_winner(void)
         {
             max_votes = candidates[i].votes;
         }
-        printf("%s %i\n", candidates[i].name, candidates[i].votes);
     }
-    printf("Max votes = %i\n", max_votes);
 
     for (int i = 0; i < candidate_count; i++)
     {
