@@ -180,8 +180,16 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    int min_votes = voter_count;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].eliminated == false && candidates[i].votes < min_votes)
+        {
+            min_votes = candidates[i].votes;
+        }
+    }
+    printf("Min votes = %i\n", min_votes);
+    return min_votes;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
