@@ -154,11 +154,6 @@ void tabulate(void)
             }
         }
     }
-
-    for (int i = 0; i < candidate_count; i++)
-    {
-        printf("%s %i\n", candidates[i].name, candidates[i].votes);
-    }
     return;
 }
 
@@ -170,7 +165,7 @@ bool print_winner(void)
         // Majority = more than 50%
         if (candidates[i].votes > voter_count * 0.5)
         {
-            printf("Winner = %s\n", candidates[i].name);
+            printf("%s\n", candidates[i].name);
             return true;
         }
     }
@@ -188,7 +183,6 @@ int find_min(void)
             min_votes = candidates[i].votes;
         }
     }
-    printf("Min votes = %i\n", min_votes);
     return min_votes;
 }
 
@@ -207,16 +201,12 @@ bool is_tie(int min)
             }
         }
     }
-    printf("Remaining candidates = %i\n", remaining_candidates);
-    printf("Min votes candidates = %i\n", min_votes_candidates);
     if (remaining_candidates == min_votes_candidates)
     {
-        printf("Tie\n");
         return true;
     }
     else
     {
-        printf("Not tie\n");
         return false;
     }
 }
@@ -229,7 +219,6 @@ void eliminate(int min)
         if (candidates[i].votes == min)
         {
             candidates[i].eliminated = true;
-            printf("Eliminated = %s\n", candidates[i].name);
         }
     }
     return;
