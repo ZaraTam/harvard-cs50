@@ -165,7 +165,15 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // Majority = more than 50%
+        if (candidates[i].votes > voter_count * 0.5)
+        {
+            printf("%s\n", candidates[i].name);
+            return true;
+        }
+    }
     return false;
 }
 
@@ -183,7 +191,7 @@ bool is_tie(int min)
     return false;
 }
 
-// Eliminate the candidate (or candidiates) in last place
+// Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
     // TODO
