@@ -170,7 +170,7 @@ bool print_winner(void)
         // Majority = more than 50%
         if (candidates[i].votes > voter_count * 0.5)
         {
-            printf("%s\n", candidates[i].name);
+            printf("Winner = %s\n", candidates[i].name);
             return true;
         }
     }
@@ -195,16 +195,21 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    int remaining_candidates = 0, tie_candidates = 0;
+    int remaining_candidates = 0, min_votes_candidates = 0;
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].eliminated == false && candidates[i].votes == min)
+        if (candidates[i].eliminated == false)
         {
             remaining_candidates++;
-            tie_candidates++;
+            if (candidates[i].votes == min)
+            {
+                min_votes_candidates++;
+            }
         }
     }
-    if (remaining_candidates == tie_candidates)
+    printf("Remaining candidates = %i\n", remaining_candidates);
+    printf("Min votes candidates = %i\n", min_votes_candidates);
+    if (remaining_candidates == min_votes_candidates)
     {
         printf("Tie\n");
         return true;
@@ -219,6 +224,13 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == min)
+        {
+            candidates[i].eliminated = true;
+            printf("Eliminated = %s\n", candidates[i].name);
+        }
+    }
     return;
 }
