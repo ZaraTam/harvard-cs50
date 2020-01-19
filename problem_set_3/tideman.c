@@ -165,9 +165,9 @@ void sort_pairs(void)
     int swap_count = -1;
     while (swap_count != 0)
     {
-        for (int i = 0; i < sizeof(pairs); i++)
+        for (int i = 0; i < sizeof(pairs) - 1; i++)
         {
-            for (int j = 0; j < sizeof(pairs); j++)
+            for (int j = 0; j < sizeof(pairs) - i - 1; j++)
             {
                 if (preferences[pairs[j].winner][pairs[j].loser] < preferences[pairs[j + 1].winner][pairs[j + 1].loser])
                 {
