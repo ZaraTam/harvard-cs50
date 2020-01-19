@@ -161,23 +161,36 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     // TODO
-    int temp[1][1];
+    int pairs_length = MAX * (MAX - 1) / 2;
+    pair temp[1];
     int swap_count = -1;
-    while (swap_count != 0)
+    do
     {
-        for (int i = 0; i < sizeof(pairs) - 1; i++)
+        swap_count = 0;
+        for (int i = 0; i < pairs_length - 1; i++)
         {
-            for (int j = 0; j < sizeof(pairs) - i - 1; j++)
+            for (int j = 0; j < pairs_length - i - 1; j++)
             {
                 if (preferences[pairs[j].winner][pairs[j].loser] < preferences[pairs[j + 1].winner][pairs[j + 1].loser])
                 {
-                    temp[0][0] = preferences[pairs[j].winner][pairs[j].loser];
-                    preferences[pairs[j].winner][pairs[j].loser] = preferences[pairs[j + 1].winner][pairs[j + 1].loser];
-                    preferences[pairs[j + 1].winner][pairs[j + 1].loser] = temp[0][0];
+                    temp[0].winner = pairs[j].winner;
+                    temp[0].loser = pairs[j].loser;
+
+                    pairs[j].winner = pairs[j + 1].winner;
+                    pairs[j].loser = pairs[j + 1].loser;
+
+                    pairs[j + 1].winner = temp[0].winner;
+                    pairs[j + 1].loser = temp[0].loser;
                 }
                 swap_count++;
             }
         }
+    }
+    while (swap_count != 0);
+
+    for (int i = 0; i < pairs_length; i++)
+    {
+        printf("Winner = %i, loser = %i\n", pairs[i].winner, pairs[i].loser);
     }
     return;
 }
