@@ -151,6 +151,8 @@ void add_pairs(void)
     {
         printf("Winner = %i\n", pairs[i].winner);
         printf("Loser = %i\n", pairs[i].loser);
+        printf("%i\n", preferences[pairs[i].winner][pairs[i].loser]);
+        printf("\n");
     }
     return;
 }
