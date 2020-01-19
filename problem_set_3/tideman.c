@@ -160,16 +160,14 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    // TODO
-    int pairs_length = MAX * (MAX - 1) / 2;
     pair temp[1];
     int swap_count = -1;
     do
     {
         swap_count = 0;
-        for (int i = 0; i < pairs_length - 1; i++)
+        for (int i = 0; i < pair_count - 1; i++)
         {
-            for (int j = 0; j < pairs_length - i - 1; j++)
+            for (int j = 0; j < pair_count - i - 1; j++)
             {
                 if (preferences[pairs[j].winner][pairs[j].loser] < preferences[pairs[j + 1].winner][pairs[j + 1].loser])
                 {
@@ -188,9 +186,12 @@ void sort_pairs(void)
     }
     while (swap_count != 0);
 
-    for (int i = 0; i < pairs_length; i++)
+    for (int i = 0; i < pair_count; i++)
     {
-        printf("Winner = %i, loser = %i\n", pairs[i].winner, pairs[i].loser);
+        printf("Winner = %i\n", pairs[i].winner);
+        printf("Loser = %i\n", pairs[i].loser);
+        printf("%i\n", preferences[pairs[i].winner][pairs[i].loser]);
+        printf("\n");
     }
     return;
 }
