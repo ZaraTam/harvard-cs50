@@ -120,13 +120,13 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            average_blue = sum_blue / average_count;
-            average_green = sum_green / average_count;
-            average_red = sum_red / average_count;
+            average_blue = round(sum_blue / average_count);
+            average_green = round(sum_green / average_count);
+            average_red = round(sum_red / average_count);
 
-            image[i][j].rgbtBlue = round(average_blue);
-            image[i][j].rgbtGreen = round(average_green);
-            image[i][j].rgbtRed = round(average_red);
+            image[i][j].rgbtBlue = average_blue;
+            image[i][j].rgbtGreen = average_green;
+            image[i][j].rgbtRed = average_red;
         }
     }
     return;
