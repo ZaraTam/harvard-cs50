@@ -108,10 +108,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE temp_image[height + 2][width + 2];
-    const array Gx[3][3] = { {-1, 0, 1},
+    const int Gx[3][3] = { {-1, 0, 1},
                             {-2, 0, 2},
                             {-1, 0, 1} };
-    const array Gy[3][3] = { {-1, -2, -1},
+    const int Gy[3][3] = { {-1, -2, -1},
                             {0, 0, 0},
                             {1, 2, 1} };
     float blue_gx, blue_gy, green_gx, green_gy, red_gx, red_gy;
@@ -119,7 +119,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
     for (int i = 0; i < height + 2; i++)
     {
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < width + 2; j++)
         {
             if (i == 0 || i == height + 1)
             {
@@ -142,25 +142,39 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
         }
     }
 
-    for (int i = 0; i < height; i++)
+    for (int i = 1; i <= height; i++)
     {
-        for (int j = 0; j < width; j++)
+        for (int j = 1; j <= width; j++)
         {
-            sum_blue = 0;
-            sum_green = 0;
-            sum_red = 0;
+            blue_gx = 0;
+            blue_gy = 0;
+            green_gx = 0;
+            green_gy = 0;
+            red_gx = 0;
+            red_gy = 0;
 
             for (int x = i - 1; x <= i + 1; x++)
             {
-                for (int y = j - 1; j <= j + 1; y++)
+                for (int y = j - 1; y <= j + 1; y++)
                 {
-
+                    for (int m = 0; m < 3; m++)
+                    {
+                        for (int n = 0; n < 3; n++)
+                        {
+                            blue_gx += Gx[m][n] * temp_image[x][y].rgbtBlue;
+                            blue_gy += Gy[m][n] * temp_image[x][y].rgbtBlue;
+                            green_gx += Gx[m][n] * temp_image[x][y].rgbtGreen;
+                            green_gy += Gy[m][n] * temp_image[x][y].rgbtGreen;
+                            red_gx += Gx[m][n] * temp_image[x][y].rgbtRed;
+                            red_gy += Gy[m][n] * temp_image[x][y].rgbtRed;
+                        }
+                    }
                 }
             }
 
-            sum_blue = round(sqrt(blue_gx^2 + blue_gy^2));
-            sum_green = round(sqrt(green_gx^2 + green_gy^2));
-            sum_red = round(sqrt(red_gx^2 + red_gy^2));
+            sum_blue = round(sqrt(pow(blue_gx, 2) + pow(blue_gy, 2)));
+            sum_green = round(sqrt(pow(green_gx, 2) + pow(green_gy, 2)));
+            sum_red = round(sqrt(pow(red_gx, 2) + pow(red_gy, 2)));
 
             image[i][j].rgbtBlue = (sum_blue < 255) ? sum_blue : 255;
             image[i][j].rgbtGreen = (sum_green < 255) ? sum_green : 255;
