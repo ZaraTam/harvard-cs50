@@ -107,5 +107,65 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE temp_image[height + 2][width + 2];
+    const array Gx[3][3] = { {-1, 0, 1},
+                            {-2, 0, 2},
+                            {-1, 0, 1} };
+    const array Gy[3][3] = { {-1, -2, -1},
+                            {0, 0, 0},
+                            {1, 2, 1} };
+    float blue_gx, blue_gy, green_gx, green_gy, red_gx, red_gy;
+    float sum_blue, sum_green, sum_red;
+
+    for (int i = 0; i < height + 2; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            if (i == 0 || i == height + 1)
+            {
+                temp_image[i][j].rgbtBlue = 0;
+                temp_image[i][j].rgbtGreen = 0;
+                temp_image[i][j].rgbtRed = 0;
+            }
+            else if (j == 0 || j == width + 1)
+            {
+                temp_image[i][j].rgbtBlue = 0;
+                temp_image[i][j].rgbtGreen = 0;
+                temp_image[i][j].rgbtRed = 0;
+            }
+            else
+            {
+                temp_image[i][j].rgbtBlue = image[i][j].rgbtBlue;
+                temp_image[i][j].rgbtGreen = image[i][j].rgbtGreen;
+                temp_image[i][j].rgbtRed = image[i][j].rgbtRed;
+            }
+        }
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            sum_blue = 0;
+            sum_green = 0;
+            sum_red = 0;
+
+            for (int x = i - 1; x <= i + 1; x++)
+            {
+                for (int y = j - 1; j <= j + 1; y++)
+                {
+
+                }
+            }
+
+            sum_blue = round(sqrt(blue_gx^2 + blue_gy^2));
+            sum_green = round(sqrt(green_gx^2 + green_gy^2));
+            sum_red = round(sqrt(red_gx^2 + red_gy^2));
+
+            image[i][j].rgbtBlue = (sum_blue < 255) ? sum_blue : 255;
+            image[i][j].rgbtGreen = (sum_green < 255) ? sum_green : 255;
+            image[i][j].rgbtRed = (sum_red < 255) ? sum_red : 255;
+        }
+    }
     return;
 }
