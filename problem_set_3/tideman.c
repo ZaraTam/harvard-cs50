@@ -215,9 +215,6 @@ void lock_pairs(void)
             visited[pairs[i].winner] = true;
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
-            
-        }
-        
     }
     return;
 }
