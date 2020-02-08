@@ -202,18 +202,38 @@ void sort_pairs(void)
 void lock_pairs(void)
 {
     // TODO
+    int visiting = 0;
+    int visited_count = 0;
+
     bool visited[candidate_count];
     for (int i = 0; i < candidate_count; i++)
     {
         visited[i] = false;
     }
 
-    for (int i = 0; i < pair_count; i++)
+    locked[pairs[0].winner][pairs[0].loser] = true;
+    if (visited[pairs[0].loser] == false)
     {
-        if (visited[pairs[i].winner] == false)
+        visiting = pairs[0].loser;
+    }
+
+    while (visited_count < candidate_count)
+    {
+        for (int i = 0; i < pair_count; i++)
         {
-            visited[pairs[i].winner] = true;
-            locked[pairs[i].winner][pairs[i].loser] = true;
+            if (pairs[i].winner == visiting)
+            {
+                locked[pairs[i].winner][pairs[i].loser] = true;
+                if (visited[pairs[i].loser] == false)
+                {
+                    visiting = pairs[i].loser;
+                }
+            }
+            else
+            {
+                visited[visiting] = true;
+                visited_count += 1;
+            }
         }
     }
     return;
