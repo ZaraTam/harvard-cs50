@@ -31,6 +31,7 @@ bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
+void visit(int visiting, bool visited[]);
 void lock_pairs(void);
 void print_winner(void);
 
@@ -198,43 +199,39 @@ void sort_pairs(void)
     return;
 }
 
+void visit(int visiting, bool visited[])
+{
+    for (int j = 0; j < pair_count; j++)
+    {
+        if (pairs[j].winner == visiting && visited[pairs[j].winner] == false && visited[pairs[j].loser] == false)
+        {
+            locked[pairs[j].winner][pairs[j].loser] = true;
+            printf("Lock %i - %i\n", pairs[j].winner, pairs[j].loser);
+
+            visiting = pairs[j].loser;
+            printf("Visiting = %i\n", visiting);
+
+            visit(visiting, visited);
+        }
+    }
+    visited[visiting] = true;
+    printf("Visited = %i\n", visiting);
+    return;
+}
+
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
     // TODO
-    int visiting = 0;
-    int visited_count = 0;
-
     bool visited[candidate_count];
     for (int i = 0; i < candidate_count; i++)
     {
         visited[i] = false;
     }
 
-    locked[pairs[0].winner][pairs[0].loser] = true;
-    if (visited[pairs[0].loser] == false)
+    for (int i = 0; i < pair_count; i++)
     {
-        visiting = pairs[0].loser;
-    }
-
-    while (visited_count < candidate_count)
-    {
-        for (int i = 0; i < pair_count; i++)
-        {
-            if (pairs[i].winner == visiting)
-            {
-                locked[pairs[i].winner][pairs[i].loser] = true;
-                if (visited[pairs[i].loser] == false)
-                {
-                    visiting = pairs[i].loser;
-                }
-            }
-            else
-            {
-                visited[visiting] = true;
-                visited_count += 1;
-            }
-        }
+        visit(pairs[i].winner, visited);
     }
     return;
 }
