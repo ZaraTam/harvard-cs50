@@ -201,6 +201,7 @@ void sort_pairs(void)
 
 void visit(int visiting, bool visited[])
 {
+    // TODO
     for (int j = 0; j < pair_count; j++)
     {
         if (pairs[j].winner == visiting && visited[pairs[j].winner] == false)
