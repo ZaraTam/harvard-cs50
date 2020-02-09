@@ -203,15 +203,18 @@ void visit(int visiting, bool visited[])
 {
     for (int j = 0; j < pair_count; j++)
     {
-        if (pairs[j].winner == visiting && visited[pairs[j].winner] == false && visited[pairs[j].loser] == false)
+        if (pairs[j].winner == visiting && visited[pairs[j].winner] == false)
         {
             locked[pairs[j].winner][pairs[j].loser] = true;
             printf("Lock %i - %i\n", pairs[j].winner, pairs[j].loser);
 
-            visiting = pairs[j].loser;
-            printf("Visiting = %i\n", visiting);
+            if (visited[pairs[j].loser] == false)
+            {
+                visiting = pairs[j].loser;
+                printf("Visiting = %i\n", visiting);
 
-            visit(visiting, visited);
+                visit(visiting, visited);
+            }
         }
     }
     visited[visiting] = true;
@@ -239,10 +242,10 @@ void lock_pairs(void)
 // Print the winner of the election
 void print_winner(void)
 {
-    // TODO
-    int false_count = 0;
+    int false_count;
     for (int j = 0; j < candidate_count; j++)
     {
+        false_count = 0;
         for (int i = 0; i < candidate_count; i++)
         {
             if (locked[i][j] == false)
