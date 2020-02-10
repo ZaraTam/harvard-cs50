@@ -217,9 +217,12 @@ void visit(int visiting, bool visited[])
                 visit(visiting, visited);
             }
         }
+        else if (j == pair_count - 1)
+        {
+            visited[visiting] = true;
+            printf("Visited = %i\n", visiting);
+        }
     }
-    visited[visiting] = true;
-    printf("Visited = %i\n", visiting);
     return;
 }
 
