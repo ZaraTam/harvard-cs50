@@ -15,8 +15,9 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Check JPEG signature in each block of 512 bytes
     unsigned char buffer[512];
-    fread(buffer, 512, 1, file);
+    fread(buffer, 1, 512, file);
     if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff)
     {
         if ((buffer[3] & 0xf0) == 0xe0)
