@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        printf("Usage: ./recover image");
+        printf("Usage: ./recover image\n");
         return 1;
     }
 
@@ -13,5 +13,15 @@ int main(int argc, char *argv[])
     if (file == NULL)
     {
         return 1;
+    }
+
+    unsigned char buffer[512];
+    fread(buffer, 512, 1, file);
+    if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff)
+    {
+        if ((buffer[3] & 0xf0) == 0xe0)
+        {
+            printf("jpg\n");
+        }
     }
 }
