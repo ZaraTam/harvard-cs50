@@ -1,24 +1,25 @@
 from cs50 import get_float
 
 while True:
-    change = get_float("Change owed: ") * 100
+    change = get_float("Change owed: ")
     if change >= 0:
+        cents = change * 100
         break
 
-coin_count = 0
+min_coins = 0
 
-while change > 0:
-    while change >= 25:
-        coin_count += change // 25
-        change %= 25
-    while change >= 10:
-        coin_count += change // 10
-        change %= 10
-    while change >= 5:
-        coin_count += change // 5
-        change %= 5
-    while change >= 1:
-        coin_count += change // 1
-        change %= 1
+while cents > 0:
+    while cents >= 25:
+        min_coins += cents // 25
+        cents %= 25
+    while cents >= 10:
+        min_coins += cents // 10
+        cents %= 10
+    while cents >= 5:
+        min_coins += cents // 5
+        cents %= 5
+    while cents >= 1:
+        min_coins += cents // 1
+        cents %= 1
 
-print(int(coin_count))
+print(int(min_coins))
