@@ -56,14 +56,8 @@ def check_checksum(card_number):
     for i in range(-2, -(length + 1), -2):
         even.append(i)
 
-    print("length =", length)
-    print("odd =", odd)
-    print("even =", even)
-
     for i in even:
         even_products.append(int(card_number[i]) * 2)
-
-    print("even_products =", even_products)
 
     for i in range(len(even_products)):
         if even_products[i] >= 10:
@@ -72,24 +66,14 @@ def check_checksum(card_number):
         else:
             even_digits.append(even_products[i])
 
-    print("even_digits =", even_digits)
-
     for i in odd:
         odd_digits.append(int(card_number[i]))
-
-    print("odd_digits =", odd_digits)
 
     sum_even = sum(even_digits)
     sum_odd = sum(odd_digits)
     sum_all = sum_even + sum_odd
 
-    print("sum_even =", sum_even)
-    print("sum_odd =", sum_odd)
-    print("sum_all =", sum_all)
-    
     checksum = sum_all % 10
-
-    print("checksum =", checksum)
 
     if checksum == 0:
         is_valid_checksum = True
