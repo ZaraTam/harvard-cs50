@@ -42,7 +42,11 @@ def count_sentences(text):
 # A sentence is any sequence of characters that ends with . or ! or ?
 
     sentence_count = 0
-    sentence_count += 1
+    end_of_sentence_characters = [".", "!", "?"]
+
+    for letter in text:
+        if letter in end_of_sentence_characters:
+            sentence_count += 1
 
     return sentence_count
 
