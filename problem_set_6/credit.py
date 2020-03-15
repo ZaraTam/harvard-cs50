@@ -34,10 +34,19 @@ def check_card_type(card_number):
         card_type = "AMEX"
     elif int(card_number[0:2]) in mastercard_start_digits:
         card_type = "MASTERCARD"
-    elif int(card_number[0:1]) in visa_start_digits):
+    elif int(card_number[0:1]) in visa_start_digits:
         card_type = "VISA"
 
     return card_type
+
+
+def check_checksum(card_number):
+    checksum = 0
+
+    if checksum == 0:
+        is_valid_checksum = True
+
+    return is_valid_checksum
 
 
 def validate_card(is_valid_length, card_type, is_valid_checksum):
@@ -52,6 +61,7 @@ def validate_card(is_valid_length, card_type, is_valid_checksum):
 
 is_valid_length = check_length(card_number)
 card_type = check_card_type(card_number)
+is_valid_checksum = check_checksum(card_number)
 card_validation = validate_card(is_valid_length, card_type, is_valid_checksum)
 
 print("Is valid length:", is_valid_length)
