@@ -27,27 +27,33 @@ def check_length(card_number):
     return is_valid_length
 
 
-def check_start_digits(card_number):
+def check_card_type(card_number):
     print("Start digits =", card_number[0:2])
 
-    if (int(card_number[0:2]) in amex_start_digits 
-            or int(card_number[0:2]) in mastercard_start_digits 
-            or int(card_number[0:1]) in visa_start_digits):
-        is_valid_start_digits = True
-    else:
-        is_valid_start_digits = False
+    if int(card_number[0:2]) in amex_start_digits:
+        card_type = "AMEX"
+    elif int(card_number[0:2]) in mastercard_start_digits:
+        card_type = "MASTERCARD"
+    elif int(card_number[0:1]) in visa_start_digits):
+        card_type = "VISA"
 
-    return is_valid_start_digits
+    return card_type
+
+
+def validate_card(is_valid_length, card_type, is_valid_checksum):
+
+    if is_valid_length == True and is_valid_checksum == True:
+        card_validation = card_type
+    else:
+        card_validation = "INVALID"
+
+    return card_validation
 
 
 is_valid_length = check_length(card_number)
-is_valid_start_digits = check_start_digits(card_number)
-print("Length:", is_valid_length)
-print("Start digits:", is_valid_start_digits)
+card_type = check_card_type(card_number)
+card_validation = validate_card(is_valid_length, card_type, is_valid_checksum)
 
-if is_valid_length and is_valid_start_digits == True:
-    is_card_valid = True
-    print("VALID")
-else:
-    is_card_valid = False
-    print("INVALID")
+print("Is valid length:", is_valid_length)
+print("Card type:", card_type)
+print(card_validation)
