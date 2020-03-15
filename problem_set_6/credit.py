@@ -18,7 +18,7 @@ visa_start_digits = [4]
 def check_length(card_number):
 
     length = len(card_number)
-    print("Length =", length)
+
     if length in card_number_length:
         is_valid_length = True
     else:
@@ -28,7 +28,8 @@ def check_length(card_number):
 
 
 def check_card_type(card_number):
-    print("Start digits =", card_number[0:2])
+
+    card_type = ""
 
     if int(card_number[0:2]) in amex_start_digits:
         card_type = "AMEX"
@@ -41,6 +42,7 @@ def check_card_type(card_number):
 
 
 def check_checksum(card_number):
+
     checksum = 0
 
     if checksum == 0:
@@ -64,6 +66,4 @@ card_type = check_card_type(card_number)
 is_valid_checksum = check_checksum(card_number)
 card_validation = validate_card(is_valid_length, card_type, is_valid_checksum)
 
-print("Is valid length:", is_valid_length)
-print("Card type:", card_type)
 print(card_validation)
