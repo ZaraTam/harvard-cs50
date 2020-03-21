@@ -15,7 +15,6 @@ def get_str_data(str_filename):
         str_read = csv.DictReader(str_file)
 
         row = next(str_read)
-        print(row)
 
         str_data = []
         for key in row:
@@ -29,7 +28,6 @@ def get_dna_str_count(dna_filename, str_data):
 
     with open(dna_filename, "r") as dna_file:
         dna_read = dna_file.read()
-        print(dna_read)
 
         dna_str_count = {}
 
@@ -41,23 +39,15 @@ def get_dna_str_count(dna_filename, str_data):
 
             while i < len(dna_read) - str_length:
                 if dna_read[i:i+str_length] == str:
-
-                    print(str)
-                    print(dna_read[i:i+str_length])
                     str_count += 1
                     if str_count > str_max_count:
                         str_max_count = str_count
                     i += str_length
-
-                    print("str_max_count =", str_max_count)
-                    print("str_count", str_count)
-
                 else:
                     str_count = 0
                     i += 1
 
             dna_str_count[str] = str_max_count
-    print(dna_str_count)
 
     return dna_str_count
 
@@ -65,13 +55,11 @@ def get_dna_str_count(dna_filename, str_data):
 def match_str(str_filename, str_data, dna_str_count):
 
     match_result = ""
-    print(str_data)
 
     with open(str_filename, "r") as str_file:
         str_read = csv.DictReader(str_file)
 
         for row in str_read:
-            print(row)
             match_str_count = 0
 
             for str in str_data:
