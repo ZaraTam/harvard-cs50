@@ -16,6 +16,7 @@ with open("characters.csv", "r") as characters:
         name = row["name"].split(" ")
         if len(name) == 2:
             first_name = name[0]
+            middle_name = None
             last_name = name[1]
         elif len(name) == 3:
             first_name = name[0]
