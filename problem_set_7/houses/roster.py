@@ -13,7 +13,6 @@ rows = db.execute("SELECT first, middle, last, birth \
                     FROM students \
                     WHERE house=? \
                     ORDER BY last, first", house)
-print(rows)
 
 for row in rows:
     first_name = row["first"]
