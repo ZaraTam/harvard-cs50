@@ -10,7 +10,9 @@ house = argv[1]
 db = cs50.SQL("sqlite:///students.db")
 
 rows = db.execute("SELECT first, middle, last, birth \
-                    FROM students WHERE house=?", house)
+                    FROM students \
+                    WHERE house=? \
+                    ORDER BY last, first", house)
 print(rows)
 
 for row in rows:
