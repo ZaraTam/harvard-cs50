@@ -15,6 +15,8 @@ https://cs50.harvard.edu/college/2019/fall/
 
 This repo includes my solutions to the problem sets for Week 1 - 7
 
+Some solutions are work in progress
+
 - Week 1 - C
 - Week 2 - Arrays
 - Week 3 - Algorithms
