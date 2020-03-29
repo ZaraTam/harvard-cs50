@@ -71,12 +71,10 @@ bool check_length(long number, int length)
     if (length == 13 || length == 15 || length == 16)
     {
         is_valid_length = true;
-        printf("Valid length\n");
     }
     else
     {
         is_valid_length = false;
-        printf("Invalid length\n");
     }
     return is_valid_length;
 }
@@ -107,14 +105,13 @@ string check_card_type(long number, int length, int digits[])
         card_type = "MASTERCARD";
     }
 
-    printf("Card type = %s\n", card_type);
     return card_type;
 }
 
 bool check_checksum(long number, int length, int digits[])
 {
     bool is_valid_checksum;
-    
+
     int odd_digits_sum = 0;
     int even_digits_sum = 0;
     int product = 0;
@@ -152,8 +149,6 @@ bool check_checksum(long number, int length, int digits[])
         is_valid_checksum = false;
     }
 
-    printf("checksum = %i\n", checksum);
-    printf("is_valid_checksum = %i\n", is_valid_checksum);
     return is_valid_checksum;
 }
 
