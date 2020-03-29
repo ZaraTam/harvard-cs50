@@ -5,35 +5,13 @@
 #include <cs50.h>
 
 long get_number(void);
+bool check_length(long number);
+
 
 int main(void)
 {
     long number = get_number();
-    
-    int odd_place_sum = 0;
-    int even_place_sum = 0;
-    int sum = 0;
-    int checksum = 0;
-
-    int length = floor(log10(number)) + 1
-    for (int i = 0; i < length; i++)
-    {
-        // TODO
-        if (i + 1) % 2 == 0
-        {
-            digit = (number % 10^(i + 1)) / 10^i * 2
-            even_place_sum += ;
-        }
-        else
-        {
-            digit = (number % 10^(i + 1)) / 10^i
-            odd_place_sum += digit;
-        }
-    }
-    printf("%li\n", odd_place_sum);
-    printf("%li\n", even_place_sum);
-    sum = odd_place_sum + even_place_sum;
-    checksum = sum % 10;
+    bool is_valid_length = check_length(number);
 }
 
 long get_number(void)
@@ -45,4 +23,35 @@ long get_number(void)
     }
     while (number < 0);
     return number;
+}
+
+
+bool check_length(long number)
+{
+    bool is_valid_length;
+    int length;
+
+    if (number != 0)
+    {
+        length = floor(log10(number)) + 1;
+    }
+    else
+    {
+        length = 1;
+    }
+
+    // American Express uses 15-digit numbers
+    // MasterCard uses 16-digit numbers
+    // Visa uses 13- and 16-digit numbers
+    if (length == 13 || length == 15 || length == 16)
+    {
+        is_valid_length = true;
+        printf("Valid length\n");
+    }
+    else
+    {
+        is_valid_length = false;
+        printf("Invalid length\n");
+    }
+    return is_valid_length;
 }
