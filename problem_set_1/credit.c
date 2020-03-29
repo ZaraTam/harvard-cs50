@@ -21,10 +21,6 @@ int main(void)
     for (int i = 0; i < length; i++)
     {
         digits[i] = number % 10;
-        printf("Number = %ld\n", number);
-        printf("index = %i\n", i);
-        printf("Digit = %i\n", digits[i]);
-        printf("\n");
         number /= 10;
     }
 
